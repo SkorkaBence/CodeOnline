@@ -46,6 +46,8 @@ function LtoL() {
         return "sh";
     if ($("#lngselect").val() == "php")
         return "php";
+    if ($("#lngselect").val() == "C#")
+        return "csharp";
 }
 
 function fillEditor() {
@@ -59,4 +61,6 @@ function fillEditor() {
         $("#editor").val("#!/bin/bash\necho \"Hello World!\"");
     if ($("#lngselect").val() == "php")
         $("#editor").val("<?php\necho \"Hello World!\";\n?>");
+    if ($("#lngselect").val() == "C#")
+        $("#editor").val("using System;\nusing System.IO;\n\nnamespace Solution\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello World!\");\n        }\n    }\n}");
 }
