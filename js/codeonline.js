@@ -102,6 +102,8 @@ function LtoL() {
         return "php";
     if ($("#lngselect").val() == "C#")
         return "csharp";
+    if ($("#lngselect").val() == "brainfuck")
+        return "python";
 }
 
 function fillEditor() {
@@ -117,6 +119,8 @@ function fillEditor() {
         $("#editor").val("<?php\necho \"Hello World!\";\n?>");
     if ($("#lngselect").val() == "C#")
         $("#editor").val("using System;\nusing System.IO;\n\nnamespace Solution\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello World!\");\n        }\n    }\n}");
+    if ($("#lngselect").val() == "brainfuck")
+        $("#editor").val("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
 }
 
 function share() {
