@@ -64,8 +64,17 @@ footer textarea {
     vertical-align: middle;
     background-color: transparent;
     margin: 5px;
-    height: 285px;
-    width: auto;
+    height: 134px;
+    width: calc(100% - 10px);
     font-size: 18px;
     border: 1px solid black;
+    resize: none;
+    outline: none;
+}
+.io{
+    width: auto;
+    height: 100%;
+    float: left;
+    margin: 0px;
+    padding: 0px;
 }

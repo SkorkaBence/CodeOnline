@@ -1,4 +1,5 @@
 $(function() {
+    screenResize();
     reseteditor();
     
     $("#runbtn").click(function() {
@@ -6,7 +7,8 @@ $(function() {
             type: "code",
             language: $("#lngselect").val(),
             postdata: {
-                code: $("#editor").val()
+                code: $("#editor").val(),
+                input: $("#inp").val()
             },
             callback: function(data) {
                 $("#res").val(data.output);
@@ -17,15 +19,25 @@ $(function() {
     $("#lngselect").change(function() {
         reseteditor();
     });
+    
+    $(window).resize(function() {
+        screenResize();
+    });
 });
 
-function reseteditor() {
+function reseteditor(refill) {
+    var cnt = $("#editor").val();
+    
     $("main").html("");
     var ta = document.createElement("textarea");
     ta.id = "editor";
     $("main").append(ta);
     
-    fillEditor();
+    if (refill === undefined) {
+        fillEditor();
+    } else {
+        ta.value = cnt;
+    }
     
     window.setTimeout(function() {
         $(ta).css("height", $("main").height());
@@ -35,6 +47,11 @@ function reseteditor() {
             lang: LtoL()
         });
     }, 1);
+}
+
+function screenResize() {
+    $(".io").css("width", $("#lngselect").offset().left - 15);
+    reseteditor(false);
 }
 
 function LtoL() {
