@@ -3,6 +3,7 @@ $(function() {
     reseteditor();
     
     $("#runbtn").click(function() {
+        $("#res").val("");
         csfapi.request({
             type: "code",
             language: $("#lngselect").val(),
