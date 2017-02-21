@@ -26,6 +26,10 @@ $(function() {
     });
 });
 
+window.onload = function() {
+    $("#loadbox").hide("fade");
+}
+
 function reseteditor(refill) {
     var cnt = $("#editor").val();
     

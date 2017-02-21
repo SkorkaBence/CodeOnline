@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i');
+
 html, body {
     padding: 0px;
     margin: 0px;
+    font-family: 'Open Sans', sans-serif;
 }
 header {
     position: absolute;
@@ -77,4 +80,67 @@ footer textarea {
     float: left;
     margin: 0px;
     padding: 0px;
+}
+#loadbox {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 200;
+}
+#loadbox .rot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    transform: translate(-50%, -50%);
+    border: 5px solid white;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%,-50%) rotate(360deg);
+    }
+}
+#loadbox .cnt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 250px;
+    font-weight: lighter;
+}
+#loadbox .s1 {
+    display: inline-block;
+    animation: pulse1 0.4s alternate infinite ease-in-out;
+}
+#loadbox .s2 {
+    transform: scale(0.8);
+    opacity: 0.5;
+    display: inline-block;
+    animation: pulse2 0.4s alternate infinite ease-in-out;
+}
+@keyframes pulse1 {
+    to {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+}
+@keyframes pulse2 {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
