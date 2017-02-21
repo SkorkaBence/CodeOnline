@@ -8,6 +8,7 @@ $(function() {
     reseteditor();
     
     $("#runbtn").click(function() {
+        $("#resploading").show("fade");
         $("#res").val("");
         csfapi.request({
             type: "code",
@@ -18,6 +19,7 @@ $(function() {
             },
             callback: function(data) {
                 $("#res").val(data.output);
+                $("#resploading").hide("fade");
             }
         });
     });
@@ -33,6 +35,7 @@ $(function() {
 
 window.onload = function() {
     $("#loadbox").hide("fade");
+    $("#resploading").hide();
 }
 
 function reseteditor(refill) {
