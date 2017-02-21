@@ -34,8 +34,8 @@
         <script type="application/javascript" src="js/codeonline.js"></script>
     </head>
     <body>
-        <main>
-        </main>
+        <div id="sharebtn">Share your code</div>
+        <main></main>
         <footer>
             <div class="io">
                 <textarea id="inp" placeholder="input"></textarea>
@@ -52,6 +52,13 @@
             <button id="runbtn">RUN</button>
             <div id="resploading" class="loading tr"><div class="rot"></div></div>
         </footer>
+        <div id="sharedialog">
+            <div class="sharecenter">
+                <h1>Share your code</h1>
+                <input type="text" id="fixurl"/>
+                <button id="shareclosebtn">Close</button>
+            </div>
+        </div>
         <div id="loadbox" class="loading">
             <div class="cnt">
                 <spam class="s1">{</spam>

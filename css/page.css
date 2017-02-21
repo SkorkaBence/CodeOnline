@@ -147,3 +147,62 @@ footer textarea {
         opacity: 1;
     }
 }
+#sharebtn {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    width: auto;
+    height: auto;
+    border-bottom-left-radius: 12px;
+    background-color: beige;
+    z-index: 15;
+    padding: 8px;
+    cursor: pointer;
+}
+#sharedialog {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 60;
+}
+.sharecenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    background-color: beige;
+    border-radius: 12px;
+    padding: 18px;
+    transform: translate(-50%, -50%);
+}
+.sharecenter h1 {
+    text-align: center;
+    font-size: 22px;
+    margin: 0px;
+    padding: 0px;
+}
+.sharecenter input[type="text"], .sharecenter button {
+    width: 300px;
+    height: auto;
+    font-size: 12px;
+    padding: 6px;
+    margin: 0px;
+    background-color: transparent;
+    border: 1px solid black;
+    outline: none;
+}
+.sharecenter button {
+    width: auto;
+    cursor: pointer;
+    transition: all 0.3s;
+    cursor: pointer;
+    outline: none;
+}
+.sharecenter button:hover {
+    background-color: black;
+    color: beige;
+}

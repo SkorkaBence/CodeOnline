@@ -31,11 +31,26 @@ $(function() {
     $(window).resize(function() {
         screenResize();
     });
+    
+    $("#sharebtn").click(function() {
+        share();
+    });
+    
+    $("#shareclosebtn").click(function() {
+        $("#sharedialog").hide("fade");
+    });
+    
+    var hash = getHash();
+    if (hash != "") {
+        loadShare(hash);
+    }
+    changeHash("");
 });
 
 window.onload = function() {
     $("#loadbox").hide("fade");
     $("#resploading").hide();
+    $("#sharedialog").hide();
 }
 
 function reseteditor(refill) {
@@ -60,6 +75,15 @@ function reseteditor(refill) {
             lang: LtoL()
         });
     }, 1);
+}
+
+function changeHash(hash) {
+	window.location.hash = hash;
+	//window.history.pushState("", "", "/"+hash);
+}
+function getHash() {
+	var pagehash = window.location.hash.substr(1);
+	return pagehash;
 }
 
 function screenResize() {
@@ -93,4 +117,57 @@ function fillEditor() {
         $("#editor").val("<?php\necho \"Hello World!\";\n?>");
     if ($("#lngselect").val() == "C#")
         $("#editor").val("using System;\nusing System.IO;\n\nnamespace Solution\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello World!\");\n        }\n    }\n}");
+}
+
+function share() {
+    var formdata = new FormData();
+    formdata.append("code", $("#editor").val());
+    formdata.append("lang", $("#lngselect").val());
+    formdata.append("input", $("#inp").val());
+    
+    $("#loadbox").show("fade");
+    
+    $.ajax({
+        url: 'https://host.csfcloud.com/learndb/codepage.php?type=save',
+        type: 'POST',
+        crossDomain: true,
+        data: formdata,
+        success: function(data){
+            $("#loadbox").hide("fade");
+            $("#sharedialog").show("fade");
+            $("#fixurl").val("https://code.csfcloud.com#" + data.id);
+        },
+        error: function(xhr, status, error){
+            console.log("HTTP GET Error: " + error);
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function loadShare(id) {
+    var formdata = new FormData();
+    formdata.append("id", id);
+    
+    $.ajax({
+        url: 'https://host.csfcloud.com/learndb/codepage.php?type=load',
+        type: 'POST',
+        crossDomain: true,
+        data: formdata,
+        success: function(data){
+            if (data.ok) {
+                $("#editor").val(data.code);
+                $("#lngselect").val(data.lang);
+                $("#inp").val(data.input)
+                reseteditor(false);
+            }
+        },
+        error: function(xhr, status, error){
+            console.log("HTTP GET Error: " + error);
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
 }
