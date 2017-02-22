@@ -40,6 +40,18 @@ $(function() {
         $("#sharedialog").hide("fade");
     });
     
+    $("#showhidefooter").click(function() {
+        if ($("footer").hasClass("hidden")) {
+            $("footer").removeClass("hidden");
+            $("#showhidefooter").html("Hide");
+            screenResize();
+        } else {
+            $("footer").addClass("hidden");
+            $("#showhidefooter").html("Show");
+            screenResize();
+        }
+    });
+    
     var hash = getHash();
     if (hash != "") {
         loadShare(hash);
@@ -88,6 +100,13 @@ function getHash() {
 
 function screenResize() {
     $(".io").css("width", $("#lngselect").offset().left - 15);
+    if ($("footer").hasClass("hidden")) {
+        $("#showhidefooter").css("bottom", 0);
+        $("main").css("height", "100%");
+    } else {
+        $("#showhidefooter").css("bottom", $("footer").height());
+        $("main").css("height", "calc(100% - "+$("footer").height()+"px)");
+    }
     reseteditor(false);
 }
 

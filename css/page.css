@@ -4,6 +4,8 @@ html, body {
     padding: 0px;
     margin: 0px;
     font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
+    background-color: black;
 }
 header {
     position: absolute;
@@ -22,6 +24,11 @@ footer {
     background-color: beige;
     z-index: 50;
     text-align: right;
+    transition: all 0.5s;
+    transition-timing-function: ease-in-out;
+}
+footer.hidden {
+    bottom: -300px;
 }
 main {
     position: absolute;
@@ -29,7 +36,6 @@ main {
     left: 0xp;
     margin: 0px;
     margin-top: 0px;
-    margin-bottom: 60px;
     background-color: black;
     width: 100%;
     height: auto;
@@ -205,4 +211,17 @@ footer textarea {
 .sharecenter button:hover {
     background-color: black;
     color: beige;
+}
+#showhidefooter {
+    position: fixed;
+    right: 0px;
+    width: auto;
+    height: auto;
+    border-top-left-radius: 12px;
+    background-color: beige;
+    z-index: 15;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.5s;
+    transition-timing-function: ease-in-out;
 }
