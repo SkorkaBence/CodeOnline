@@ -79,9 +79,11 @@ $(function() {
 
 var translatedvisible = false;
 var translate = false;
+var stilloading = false;
 
 window.onload = function() {
-    $("#loadbox").hide("fade");
+    if (!stilloading)
+        $("#loadbox").hide("fade");
     $("#resploading").hide();
     $("#sharedialog").hide();
 }
@@ -224,12 +226,16 @@ function loadShare(id) {
     var formdata = new FormData();
     formdata.append("id", id);
     
+    stilloading = true;
+    $("#loadbox").show("fade");
+    
     $.ajax({
         url: 'https://host.csfcloud.com/learndb/codepage.php?type=load',
         type: 'POST',
         crossDomain: true,
         data: formdata,
         success: function(data){
+            $("#loadbox").hide("fade");
             if (data.ok) {
                 $("#editor").val(data.code);
                 $("#lngselect").val(data.lang);
