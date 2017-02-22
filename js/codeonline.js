@@ -20,6 +20,9 @@ $(function() {
             callback: function(data) {
                 $("#res").val(data.output);
                 $("#resploading").hide("fade");
+            }, error: function(err) {
+                $("#res").val("An error has accured, more info in the JavaScript console");
+                $("#resploading").hide("fade");
             }
         });
     });
@@ -79,14 +82,21 @@ function reseteditor(refill) {
         ta.value = cnt;
     }
     
-    window.setTimeout(function() {
+    $(ta).css("height", $("main").height());
+
+    $(ta).ace({
+        theme: "chaos",
+        lang: LtoL()
+    });
+    
+    /*window.setTimeout(function() {
         $(ta).css("height", $("main").height());
 
         $(ta).ace({
             theme: "chaos",
             lang: LtoL()
         });
-    }, 1);
+    }, 1);*/
 }
 
 function changeHash(hash) {
