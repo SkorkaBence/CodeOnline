@@ -22,17 +22,19 @@ $(function() {
             callback: function(data) {
                 $("#res").val(data.output);
                 $("#resploading").hide("fade");
-                if (data.translated !== undefined) {
-                    showTranslated(data.translated);
-                    if (!translatedvisible) {
-                        translatedvisible = true;
-                        screenResize();
-                    }
-                } else {
-                    $("#translatedcontainer").hide();
-                    if (translatedvisible) {
-                        translatedvisible = false;
-                        screenResize();
+                if (translate) {
+                    if (data.translated !== undefined) {
+                        showTranslated(data.translated);
+                        if (!translatedvisible) {
+                            translatedvisible = true;
+                            screenResize();
+                        }
+                    } else {
+                        $("#translatedcontainer").hide();
+                        if (translatedvisible) {
+                            translatedvisible = false;
+                            screenResize();
+                        }
                     }
                 }
             }
@@ -76,6 +78,7 @@ $(function() {
 });
 
 var translatedvisible = false;
+var translate = false;
 
 window.onload = function() {
     $("#loadbox").hide("fade");
