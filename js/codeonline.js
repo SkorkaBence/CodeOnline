@@ -133,6 +133,10 @@ function LtoL() {
         return "csharp";
     if ($("#lngselect").val() == "brainfuck")
         return "python";
+    if ($("#lngselect").val() == "pascal")
+        return "haxe";
+    if ($("#lngselect").val() == "shakespeare")
+        return "";
 }
 
 function fillEditor() {
@@ -150,6 +154,10 @@ function fillEditor() {
         $("#editor").val("using System;\nusing System.IO;\n\nnamespace Solution\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello World!\");\n        }\n    }\n}");
     if ($("#lngselect").val() == "brainfuck")
         $("#editor").val("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
+    if ($("#lngselect").val() == "pascal")
+        $("#editor").val("PROGRAM Solution;\nUSES\n    sysutils;\n\nBEGIN\n    WriteLn('Hello World!');\nEND.");
+    if ($("#lngselect").val() == "shakespeare")
+        $("#editor").val("");
 }
 
 function share() {
