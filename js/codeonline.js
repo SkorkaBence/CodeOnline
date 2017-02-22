@@ -4,12 +4,16 @@ $(function() {
         return;
     }
     
+    $("#translatedcontainer").hide();
+    
     screenResize();
     reseteditor();
     
     $("#runbtn").click(function() {
         $("#resploading").show("fade");
         $("#res").val("");
+        $("#translatedcontainer").hide();
+        screenResize();
         csfapi.request({
             type: "code",
             language: $("#lngselect").val(),
@@ -20,14 +24,15 @@ $(function() {
             callback: function(data) {
                 $("#res").val(data.output);
                 $("#resploading").hide("fade");
-            }, error: function(err) {
-                $("#res").val("An error has accured, more info in the JavaScript console");
-                $("#resploading").hide("fade");
+                if (data.translated !== undefined) {
+                    showTranslated(data.translated);
+                }
             }
         });
     });
     
     $("#lngselect").change(function() {
+        $("#translatedcontainer").hide();
         reseteditor();
     });
     
@@ -88,15 +93,22 @@ function reseteditor(refill) {
         theme: "chaos",
         lang: LtoL()
     });
-    
-    /*window.setTimeout(function() {
-        $(ta).css("height", $("main").height());
+}
 
-        $(ta).ace({
-            theme: "chaos",
-            lang: LtoL()
-        });
-    }, 1);*/
+function showTranslated(code) {
+    $("#translatedcontainer").show();
+    $("#translatedcontainer").html("");
+    var ta = document.createElement("textarea");
+    $("#translatedcontainer").append(ta);
+    ta.value = code;
+    
+    $(ta).css("height", $("#translatedcontainer").height());
+    $(ta).css("width", "100%");
+    
+    $(ta).ace({
+        theme: "chaos",
+        lang: "c_cpp"
+    });
 }
 
 function changeHash(hash) {
@@ -113,9 +125,17 @@ function screenResize() {
     if ($("footer").hasClass("hidden")) {
         $("#showhidefooter").css("bottom", 0);
         $("main").css("height", "100%");
+        $("#translatedcontainer").css("height", "100%");
     } else {
         $("#showhidefooter").css("bottom", $("footer").height());
         $("main").css("height", "calc(100% - "+$("footer").height()+"px)");
+        $("#translatedcontainer").css("height", "calc(100% - "+$("footer").height()+"px)");
+    }
+    if ($("#translatedcontainer").is(":visible")) {
+        $("main").css("width", "50%");
+        showTranslated($("#translatedcontainer textarea").val());
+    } else {
+        $("main").css("width", "100%");
     }
     reseteditor(false);
 }

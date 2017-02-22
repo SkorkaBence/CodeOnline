@@ -225,3 +225,15 @@ footer textarea {
     transition: all 0.5s;
     transition-timing-function: ease-in-out;
 }
+#translatedcontainer {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    margin: 0px;
+    margin-top: 0px;
+    background-color: black;
+    width: 50%;
+    height: auto;
+    min-height: calc(100% - 300px);
+    z-index: 10;
+}
