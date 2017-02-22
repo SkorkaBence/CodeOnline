@@ -12,8 +12,6 @@ $(function() {
     $("#runbtn").click(function() {
         $("#resploading").show("fade");
         $("#res").val("");
-        $("#translatedcontainer").hide();
-        screenResize();
         csfapi.request({
             type: "code",
             language: $("#lngselect").val(),
@@ -26,6 +24,16 @@ $(function() {
                 $("#resploading").hide("fade");
                 if (data.translated !== undefined) {
                     showTranslated(data.translated);
+                    if (!translatedvisible) {
+                        translatedvisible = true;
+                        screenResize();
+                    }
+                } else {
+                    $("#translatedcontainer").hide();
+                    if (translatedvisible) {
+                        translatedvisible = false;
+                        screenResize();
+                    }
                 }
             }
         });
@@ -66,6 +74,8 @@ $(function() {
     }
     changeHash("");
 });
+
+var translatedvisible = false;
 
 window.onload = function() {
     $("#loadbox").hide("fade");
