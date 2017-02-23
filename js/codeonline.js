@@ -192,7 +192,7 @@ function fillEditor() {
     if ($("#lngselect").val() == "pascal")
         $("#editor").val("PROGRAM Solution;\nUSES\n    sysutils;\n\nBEGIN\n    WriteLn('Hello World!');\nEND.");
     if ($("#lngselect").val() == "shakespeare")
-        $("#editor").val("");
+        $("#editor").val(shakespeare_hello_world);
 }
 
 function share() {
