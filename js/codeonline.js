@@ -1,8 +1,10 @@
 $(function() {
-    if (location.protocol != 'https:' && location.protocol != 'file:') {
-        location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-        return;
-    }
+    try {
+        if (location.protocol != 'https:' && location.protocol != 'file:') {
+            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+            return;
+        }
+    } catch(e) {}
     
     $("#translatedcontainer").hide();
     
@@ -75,6 +77,34 @@ $(function() {
         loadShare(hash);
     }
     changeHash("");
+    
+    var location = window.location.href;
+    var cspl = location.split("#")[0].split("?");
+    if (cspl.length > 1) {
+        var query = cspl[1];
+        var qrs = query.split("&");
+
+        console.log("query: " + qrs);
+
+        var iframed = false;
+
+        for (var i = 0; i < qrs.length; i++) {
+            var q = qrs[i].split("=");
+            console.log(q[0] + " = " + q[1]);
+            if (q[0] == "embedded") {
+                iframed = true;
+            }
+        }
+
+        if (iframed == true) {
+            $("#sharebtn").hide();
+            $("#showhidefooter").hide();
+            $("#lngselect").hide();
+            $("#inp").hide();
+            $("footer").css("height", 150 + "px");
+            screenResize();
+        }
+    }
 });
 
 var translatedvisible = false;
@@ -136,7 +166,11 @@ function getHash() {
 }
 
 function screenResize() {
-    $(".io").css("width", $("#lngselect").offset().left - 15);
+    if ($("#lngselect").is(":visible")) {
+        $(".io").css("width", $("#lngselect").offset().left - 15);
+    } else {
+        $(".io").css("width", $("#runbtn").offset().left - 15);
+    }
     if ($("footer").hasClass("hidden")) {
         $("#showhidefooter").css("bottom", 0);
         $("main").css("height", "100%");
@@ -212,6 +246,7 @@ function share() {
             $("#loadbox").hide("fade");
             $("#sharedialog").show("fade");
             $("#fixurl").val("https://code.csfcloud.com#" + data.id);
+            $("#fixembed").val("https://code.csfcloud.com?embedded#" + data.id);
         },
         error: function(xhr, status, error){
             console.log("HTTP GET Error: " + error);
