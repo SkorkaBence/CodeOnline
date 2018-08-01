@@ -1,6 +1,5 @@
-let editor : CodeEditor|undefined;
+let manager : WorkspaceManager|undefined;
 
-window.addEventListener("load", function() {
-    editor = new CodeEditor();
-    $("#loadbox").style.display = 'none';
-});
+let csfAsyncInit = function() {
+    manager = new WorkspaceManager();
+}

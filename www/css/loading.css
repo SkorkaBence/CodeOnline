@@ -1,0 +1,41 @@
+.pageloading {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    z-index: 2147483647;
+    font-family: 'Ubuntu Mono', monospace;
+    color: inherit;
+    font-size: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pageloading .s1, .pageloading .s2 {
+    display: inline-block;
+    font-size: 250px;
+    animation-name: loading-pulse;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.pageloading .s1 {
+    animation-delay: 0;
+}
+.pageloading .s2 {
+    animation-delay: -0.4s;
+}
+@keyframes loading-pulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.6);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

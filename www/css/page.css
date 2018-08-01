@@ -8,247 +8,134 @@ html, body {
     margin: 0px;
     font-family: 'Roboto', sans-serif;
     overflow: hidden;
-    background-color: black;
+    background-color: rgb(43, 43, 43);
+    color: white;
 }
 .noselect {
-    -webkit-touch-callout:none;
-    -webkit-user-select:none;
-    -khtml-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none
-}
-
-header {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 0px;
-    z-index: 5;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
 }
 
 main {
-    position: absolute;
-    top: 0px;
-    left: 0xp;
-    margin: 0px;
-    margin-top: 0px;
-    background-color: black;
-    width: 100%;
-    height: auto;
-    min-height: calc(100% - 300px);
-    z-index: 10;
-}
-main textarea {
-    background-color: transparent;
-    border: none;
-    color: white;
-    width: 100%;
-    height: 500px;
-    padding: 0px;
-    margin: 0px;
-}
-
-footer {
     position: fixed;
-    bottom: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 300px;
-    background-color: beige;
-    z-index: 50;
+    height: 100%;
+    z-index: 1000;
+    display: grid;
+    grid-template-areas:
+        'options options'
+        'files editor'
+        'files console';
+    grid-template-rows: 70px auto 200px;
+    grid-template-columns: 300px auto;
+}
+main .options {
+    grid-area: options;
     text-align: right;
-    transition: bottom 0.5s;
-    transition-timing-function: ease-in-out;
-
+    background-color: rgb(96, 96, 96);
     display: flex;
-    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: stretch;
+    border-bottom: 1px solid rgb(63, 63, 63);
 }
-footer.hidden {
-    bottom: -300px;
-}
-footer textarea, footer select, footer button {
-    margin: 8px;
-}
-footer .io {
+main .options .wrapper {
     flex-grow: 1;
+}
+main .files {
+    grid-area: files;
+    background-color: rgb(63, 63, 63);
+}
+main .editor {
+    grid-area: editor;
+}
+main .console {
+    grid-area: console;
+    border-top: 1px solid rgb(63, 63, 63);
+    background-color: black;
+    overflow: auto;
     display: flex;
-    flex-flow: column;
+    justify-content: stretch;
 }
-footer .io textarea {
+main .console textarea {
     flex-grow: 1;
+    background: none;
+    border: none;
+    padding: 18px;
     resize: none;
     outline: none;
-    padding: 4px;
+    color: inherit;
+    font-size: inherit;
     font-family: 'Ubuntu Mono', monospace;
-    background: none;
-    font-size: 18px;
-    border: 1px solid black;
-}
-footer select, footer button {
-    font-size: 20px;
-    background: none;
-    border: 1px solid black;
-    color: black;
-    transition: all 0.3s;
-    cursor: pointer;
-    outline: none;
-}
-footer select:hover, footer button:hover {
-    background-color: black;
-    color: beige;
 }
 
-.loading {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    z-index: 200;
-    overflow: hidden;
-    font-family: 'Ubuntu Mono', monospace;
-}
-.loading.tr {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.loading .rot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    height: 200px;
-    transform: translate(-50%, -50%);
-    border: 5px solid white;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    0% {
-        transform: translate(-50%,-50%) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%,-50%) rotate(360deg);
-    }
-}
-.loading .cnt {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    transform: translate(-50%, -50%);
+.mtbutton {
+    display: inline-block;
+    padding: 12px 22px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
     color: white;
-    font-size: 250px;
-    font-weight: lighter;
-}
-.loading .s1 {
-    display: inline-block;
-    animation: pulse1 0.4s alternate infinite ease-in-out;
-}
-.loading .s2 {
-    transform: scale(0.8);
-    opacity: 0.5;
-    display: inline-block;
-    animation: pulse2 0.4s alternate infinite ease-in-out;
-}
-@keyframes pulse1 {
-    to {
-        transform: scale(0.8);
-        opacity: 0.5;
-    }
-}
-@keyframes pulse2 {
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-#sharebtn {
-    position: fixed;
-    right: 0px;
-    top: 0px;
-    width: auto;
-    height: auto;
-    border-bottom-left-radius: 12px;
-    background-color: beige;
-    z-index: 15;
-    padding: 8px;
-    cursor: pointer;
-}
-#sharedialog {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 60;
-}
-.sharecenter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    background-color: beige;
-    border-radius: 12px;
-    padding: 18px;
-    transform: translate(-50%, -50%);
-}
-.sharecenter h1 {
-    text-align: center;
-    font-size: 22px;
-    margin: 0px;
-    padding: 0px;
-}
-.sharecenter input[type="text"], .sharecenter button {
-    width: 300px;
-    height: auto;
-    font-size: 12px;
-    padding: 6px;
-    margin: 0px;
-    background-color: transparent;
-    border: 1px solid black;
+    text-transform: uppercase;
+    background-color: #000d72;
+    border: 1px solid #000d72;
+    border-radius: 2px;
+    margin: 6px;
     outline: none;
-}
-.sharecenter button {
-    width: auto;
     cursor: pointer;
+    font-family: inherit;
     transition: all 0.3s;
-    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+.mtbutton:hover {
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.12), 0 8px 8px 0 rgba(0,0,0,0.24);
+    background-color: #0b1a8a;
+}
+.mtbutton:disabled {
+    background-color: gray;
+    color: black;
+}
+.mtbutton i {
+    font-size: inherit;
+    line-height: inherit;
+    transform: translate(0, -5%);
+}
+.mtbutton i, .mtbutton span {
+    vertical-align: middle;
+}
+
+.mtbutton.secondary {
+    background: none;
+    border-color: gray;
+    color: inherit;
+}
+
+.mtinput {
+    padding: 10px 12px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
+    border: none;
+    border-radius: 2px;
+    margin: 6px;
     outline: none;
+    font-family: inherit;
+    transition: all 0.3s;
+    font-size: 16px;
+    background-color: rgb(73, 73, 73);
+    border: 2px solid rgb(21, 21, 21);
+    color:  white;
 }
-.sharecenter button:hover {
-    background-color: black;
-    color: beige;
+.mtinput.fullwidth {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
-#showhidefooter {
-    position: fixed;
-    right: 0px;
-    width: auto;
-    height: auto;
-    border-top-left-radius: 12px;
-    background-color: beige;
-    z-index: 15;
-    padding: 8px;
-    cursor: pointer;
-    transition: all 0.5s;
-    transition-timing-function: ease-in-out;
-}
-#translatedcontainer {
-    position: absolute;
-    top: 0px;
-    left: 50%;
-    margin: 0px;
-    margin-top: 0px;
-    background-color: black;
-    width: 50%;
-    height: auto;
-    min-height: calc(100% - 300px);
-    z-index: 10;
+
+a {
+    color: inherit;
+    text-decoration: underline;
 }

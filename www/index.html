@@ -1,76 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Code Online</title>
-        <meta charset="utf-8"/>
-        
+
         <link rel="icon" type="image/png" href="img/icon.png" />
-        
+            
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700,700i" rel="stylesheet">
         
         <link href="css/page.css" rel=stylesheet>
-        
-        <!--<script type="application/javascript" src="js/jquery-3.1.1.min.js"></script>
-        <script type="application/javascript" src="js/jquery-ui.min.js"></script>
-        
-        <link rel="stylesheet" type="text/css" href="https://csfcloud.com/csf/ProgramAPI/bin/CSF.css">
-        <script type="text/javascript" src="https://csfcloud.com/csf/ProgramAPI/bin/CSF.js"></script>
-        
-        <script>
-            csfapi.setDeveloperKey("ojxqwmcrwfn1eue7pu9tr3g57xz1ory31mknym4l");
-            csfapi.setLoginKey("yoydeo4r63p6a6fogd54zabdnwtxdap1.apps.csfcloud.com");
-        </script>
-        
-        <script src="js/ace/ace.js"></script>
-        <script src="js/ace/theme-chaos.js"></script>
-        <script src="js/ace/mode-sh.js"></script>
-        <script src="js/ace/mode-c_cpp.js"></script>
-        <script src="js/ace/mode-python.js"></script>
-        <script src="js/ace/mode-php.js"></script>
-        <script src="js/ace/mode-csharp.js"></script>
-        <script src="js/ace/mode-javascript.js"></script>
-        <script src="js/ace/mode-haxe.js"></script>
-        <script src="js/ace/mode-html.js"></script>
-        <script src="js/ace/mode-powershell.js"></script>
-        <script src="js/jquery-ace.min.js"></script>-->
+        <link href="css/loading.css" rel=stylesheet>
+        <link href="css/dialog.css" rel=stylesheet>
         
         <script src="js/codeonline.js" defer></script>
+        <script src="https://csfcloud.blob.core.windows.net/packages/CSFCloud.JS.SDK/latest/packageloader.js" defer></script>
     </head>
     <body>
-        <div id="sharebtn">Share your code</div>
-        <main></main>
-        <div id="translatedcontainer"></div>
-        <div id="showhidefooter">Hide</div>
-        <footer>
-            <div class="io">
-                <textarea id="inp" placeholder="input"></textarea>
-                <textarea id="res" placeholder="output" readonly></textarea>
+        <main>
+            <div class="options">
+                <div class="wrapper">
+                    <!--<select class="mtinput">
+                        <option disabled selected>-- SELECT YOUR LANGUAGE --</option>
+                        <option value="cpp">C++ 17</option>
+                    </select>-->
+                </div>
             </div>
-            <select id="lngselect">
-                <option value="C++">C++ (14)</option>
-                <option value="C#">C#</option>
-                <option value="python">python 2.7</option>
-                <option value="python3.6">python 3.6</option>
-                <option value="bash">BASH</option>
-                <option value="php">PHP</option>
-                <option value="pascal">Pascal</option>
-                <option value="brainfuck">BrainFuck</option>
-                <option value="shakespeare">Shakespeare</option>
-            </select>
-            <button id="runbtn">RUN</button>
-            <div id="resploading" class="loading tr"><div class="rot"></div></div>
-        </footer>
-        <div id="sharedialog">
-            <div class="sharecenter">
-                <h1>The URL for your code</h1>
-                <input type="text" id="fixurl"/>
-                <input type="text" id="fixembed"/>
-                <button id="shareclosebtn">Close</button>
+            <div class="files">
+                <button class="mtbutton noselect">New file</button>
             </div>
-        </div>
-        <div id="loadbox" class="loading">
-            <div class="cnt">
+            <div class="editor">
+
+            </div>
+            <div class="console">
+                <textarea readonly>This is the console</textarea>
+            </div>
+        </main>
+        <div id="loadbox" class="pageloading">
+            <div>
                 <div class="s1">{</div>
                 <div class="s2">}</div>
             </div>
