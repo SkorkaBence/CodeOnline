@@ -1,6 +1,7 @@
 config.php
 .vscode
 legacy-js
+www/js
 
 # Windows image file caches
 Thumbs.db
